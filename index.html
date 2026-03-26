@@ -2,50 +2,41 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema de Streaming Pro</title>
+    <title>Estación de Streaming</title>
     <style>
-        body { background: #000; color: #0f0; font-family: monospace; display: flex; flex-direction: column; align-items: center; }
-        #contenedor-video { width: 80%; max-width: 800px; border: 2px solid #333; margin-top: 20px; }
-        video { width: 100%; height: auto; }
-        .controles { margin-top: 15px; }
-        button { background: #222; color: #0f0; border: 1px solid #0f0; padding: 10px; cursor: pointer; margin: 5px; }
-        button:hover { background: #0f0; color: #000; }
+        body { background: #000; color: #0f0; font-family: monospace; text-align: center; }
+        video { width: 90%; max-width: 700px; border: 2px solid #333; background: #111; margin-top: 20px; }
+        .controles { margin-top: 20px; }
+        button { background: #222; color: #0f0; border: 1px solid #0f0; padding: 15px; cursor: pointer; margin: 5px; font-size: 16px; }
+        button:active { background: #0f0; color: #000; }
     </style>
 </head>
 <body>
     <h1>ESTACIÓN DE STREAMING V1.0</h1>
-    <div id="contenedor-video">
-        <video id="reproductor" controls autoplay>
-            Tu navegador no soporta video.
-        </video>
-    </div>
+    <video id="repro" controls>Tu navegador no soporta video.</video>
     <div class="controles">
-        <button onclick="cambiarCanal(0)">Canal 1</button>
-        <button onclick="cambiarCanal(1)">Canal 2</button>
-        <button onclick="cambiarCanal(2)">Canal 3</button>
+        <button onclick="play(1)">CANAL 1</button>
+        <button onclick="play(2)">CANAL 2</button>
+        <button onclick="play(3)">CANAL 3</button>
     </div>
 
     <script>
-        let datosPlaylist;
-        const repro = document.getElementById('reproductor');
+        const item = "c3_v002"; // Tu item de Archive.org
+        const vid = document.getElementById('repro');
 
-        // Cargar el cerebro (JSON)
-        fetch('playlist.json')
-            .then(response => response.json())
-            .then(data => {
-                datosPlaylist = data;
-                console.log("Sistema cargado...");
-                cambiarCanal(0); // Empezar con el canal 1
-            });
+        function play(ch) {
+            // Definimos los archivos según el botón
+            let file = "";
+            if(ch === 1) file = "c1_v001.mp4";
+            if(ch === 2) file = "c1_v003.mp4";
+            if(ch === 3) file = "c1_v005.mp4";
 
-        function cambiarCanal(num) {
-            const itemID = atob(datosPlaylist.config.item_id); // Decodifica el Base64
-            const videoArchivo = datosPlaylist.canales[num].videos[0].archivo;
-            const urlFinal = `https://archive.org{itemID}/${videoArchivo}`;
+            const url = `https://archive.org{item}/${file}`;
+            console.log("Cargando: " + url);
             
-            repro.src = urlFinal;
-            repro.play();
-            console.log("Cargando: " + urlFinal);
+            vid.src = url;
+            vid.load();
+            vid.play().catch(() => alert("Haz clic en el botón PLAY del video para iniciar"));
         }
     </script>
 </body>
