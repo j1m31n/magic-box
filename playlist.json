@@ -1,0 +1,28 @@
+{
+  "config": {
+    "item_id": "YzNfdjAwMg==" 
+  },
+  "canales": [
+    {
+      "nombre": "Canal 1",
+      "videos": [
+        {"archivo": "c1_v001.mp4", "titulo": "Video 001"},
+        {"archivo": "c1_v002.mp4", "titulo": "Video 002"}
+      ]
+    },
+    {
+      "nombre": "Canal 2",
+      "videos": [
+        {"archivo": "c2_v001.mp4", "titulo": "Video 001"},
+        {"archivo": "", "titulo": ""}
+      ]
+    },
+    {
+      "nombre": "Canal 3",
+      "videos": [
+        {"archivo": "c3_v001.mp4", "titulo": "Video 001"}
+        {"archivo": "c3_v002.mp4", "titulo": "Video 002"}
+      ]
+    }
+  ]
+}
